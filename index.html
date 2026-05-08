@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="모바일 개발자 겸 공인중개사 포트폴리오 — PHP, Linux, iOS/Android 개발 전문" />
+  <title>Portfolio — 모바일 개발자 & 공인중개사</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/tabler-icons.min.css" />
+  <style>
+    :root {
+      --blue-deep: #042C53;
+      --blue-dark: #0C447C;
+      --blue-mid:  #185FA5;
+      --blue-base: #378ADD;
+      --blue-light: #85B7EB;
+      --blue-pale: #B5D4F4;
+      --blue-mist: #E6F1FB;
+
+      --green-deep: #04342C;
+      --green-dark: #085041;
+      --green-mid:  #0F6E56;
+      --green-base: #1D9E75;
+      --green-light: #5DCAA5;
+      --green-pale: #9FE1CB;
+      --green-mist: #E1F5EE;
+
+      --purple-deep: #26215C;
+      --purple-dark: #3C3489;
+      --purple-mid:  #534AB7;
+      --purple-base: #7F77DD;
+      --purple-light: #AFA9EC;
+      --purple-pale: #CECBF6;
+      --purple-mist: #EEEDFE;
+
+      --coral-deep: #4A1B0C;
+      --coral-dark: #712B13;
+      --coral-mid:  #993C1D;
+      --coral-base: #D85A30;
+      --coral-light: #F0997B;
+      --coral-pale: #F5C4B3;
+      --coral-mist: #FAECE7;
+
+      --gray-deep: #2C2C2A;
+      --gray-dark: #444441;
+      --gray-mid:  #5F5E5A;
+      --gray-base: #888780;
+      --gray-light: #B4B2A9;
+      --gray-pale: #D3D1C7;
+      --gray-mist: #F1EFE8;
+
+      --font-sans: 'Noto Sans KR', sans-serif;
+      --font-serif: 'DM Serif Display', serif;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: #f8f8f6;
+      color: #1a1a18;
+      min-height: 100vh;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--blue-dark);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--blue-light);
+      text-transform: uppercase;
+    }
+    .hire-badge {
+      font-size: 11px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      background: var(--blue-base);
+      color: var(--blue-mist);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    /* ── TAB BAR ── */
+    .tab-bar {
+      display: flex;
+      background: var(--blue-deep);
+      border-bottom: 1px solid var(--blue-mid);
+      position: sticky;
+      top: 52px;
+      z-index: 99;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .tab-bar::-webkit-scrollbar { display: none; }
+    .tab {
+      flex: 1;
+      min-width: 64px;
+      padding: 0.9rem 0.5rem;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--blue-light);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .tab:hover:not(.active) { color: var(--blue-pale); }
+    .tab.active { color: #fff; border-bottom-color: var(--blue-light); }
+
+    /* ── PANELS ── */
+    .panel { display: none; animation: fadeIn 0.25s ease; }
+    .panel.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ══════════════════════════
+       HOME PANEL
+    ══════════════════════════ */
+    .home-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .hh-left {
+      background: var(--blue-dark);
+      padding: 3.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .hh-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--blue-light);
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .hh-title {
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1.18;
+      color: var(--blue-mist);
+    }
+    .hh-title em { font-style: normal; color: var(--blue-light); }
+    .hh-desc {
+      font-size: 14px;
+      color: var(--blue-pale);
+      line-height: 1.8;
+      max-width: 400px;
+    }
+    .hh-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 0.5rem; }
+    .btn-w {
+      font-size: 13px;
+      padding: 10px 24px;
+      border-radius: var(--radius-md);
+      background: var(--blue-mist);
+      color: var(--blue-dark);
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-family: var(--font-sans);
+      transition: background 0.2s;
+    }
+    .btn-w:hover { background: #fff; }
+    .btn-o {
+      font-size: 13px;
+      padding: 10px 24px;
+      border-radius: var(--radius-md);
+      background: transparent;
+      color: var(--blue-pale);
+      border: 1px solid var(--blue-base);
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-o:hover { border-color: var(--blue-pale); color: #fff; }
+
+    .hh-right {
+      background: var(--blue-mist);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hh-stat-big { font-size: 72px; font-weight: 700; color: var(--blue-dark); line-height: 1; }
+    .hh-stat-label { font-size: 12px; color: var(--blue-mid); margin-top: 4px; letter-spacing: 0.06em; }
+    .tag-stack { display: flex; flex-direction: column; gap: 8px; margin-top: 1.5rem; }
+    .tag-pill {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 14px;
+      background: #fff;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--blue-pale);
+      transition: border-color 0.2s;
+    }
+    .tag-pill:hover { border-color: var(--blue-base); }
+    .tag-pill i { font-size: 16px; color: var(--blue-mid); }
+    .tag-pill span { font-size: 13px; color: var(--blue-dark); font-weight: 500; }
+
+    .home-stripe {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--green-base);
+    }
+    .hs-cell {
+      padding: 1.25rem 1.5rem;
+      border-right: 1px solid var(--green-mid);
+    }
+    .hs-cell:last-child { border-right: none; }
+    .hs-num { font-size: 22px; font-weight: 700; color: var(--green-mist); }
+    .hs-lbl { font-size: 11px; color: var(--green-light); margin-top: 3px; }
+
+    /* ══════════════════════════
+       SKILLS PANEL
+    ══════════════════════════ */
+    .sp-header { background: var(--gray-dark); padding: 2.5rem 2rem; }
+    .sp-htitle { font-size: 28px; font-weight: 700; color: var(--gray-mist); }
+    .sp-hsub { font-size: 14px; color: var(--gray-light); margin-top: 8px; line-height: 1.6; }
+    .sp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px;
+      background: var(--gray-pale);
+    }
+    .sp-card {
+      background: var(--gray-mist);
+      padding: 1.5rem;
+      transition: background 0.2s;
+    }
+    .sp-card:hover { background: #fff; }
+    .sp-icon { font-size: 28px; color: var(--gray-dark); margin-bottom: 12px; }
+    .sp-name { font-size: 14px; font-weight: 700; color: var(--gray-deep); margin-bottom: 6px; }
+    .sp-desc { font-size: 13px; color: var(--gray-mid); line-height: 1.6; }
+    .sp-footer {
+      background: var(--gray-deep);
+      padding: 1.25rem 2rem;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .sp-chip {
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: var(--gray-dark);
+      color: var(--gray-pale);
+      border: 1px solid var(--gray-mid);
+    }
+
+    /* ══════════════════════════
+       CERTS PANEL
+    ══════════════════════════ */
+    .cp-top { background: var(--purple-mid); padding: 2.5rem 2rem; }
+    .cp-title { font-size: 28px; font-weight: 700; color: var(--purple-mist); }
+    .cp-sub { font-size: 14px; color: var(--purple-pale); margin-top: 8px; line-height: 1.6; }
+    .cp-list { background: var(--purple-mist); display: flex; flex-direction: column; gap: 1px; }
+    .cp-item {
+      background: #fff;
+      padding: 1.2rem 2rem;
+      display: grid;
+      grid-template-columns: 56px 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      transition: background 0.2s;
+    }
+    .cp-item:hover { background: var(--purple-mist); }
+    .cp-num { font-size: 28px; font-weight: 700; color: var(--purple-pale); font-family: var(--font-serif); }
+    .cp-info-title { font-size: 14px; font-weight: 700; color: var(--purple-deep); }
+    .cp-info-sub { font-size: 12px; color: var(--purple-mid); margin-top: 3px; }
+    .cp-badge {
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: var(--purple-mist);
+      color: var(--purple-dark);
+      border: 1px solid var(--purple-pale);
+      white-space: nowrap;
+    }
+    .cp-bottom {
+      background: var(--purple-deep);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cp-bottom-text { font-size: 13px; color: var(--purple-light); }
+    .cp-bottom-btn {
+      font-size: 13px;
+      padding: 9px 22px;
+      border-radius: var(--radius-md);
+      background: var(--purple-mid);
+      color: var(--purple-mist);
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-family: var(--font-sans);
+      transition: background 0.2s;
+    }
+    .cp-bottom-btn:hover { background: var(--purple-base); }
+
+    /* ══════════════════════════
+       ABOUT PANEL
+    ══════════════════════════ */
+    .ap-hero {
+      background: var(--coral-mid);
+      padding: 3rem 2rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .ap-quote {
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--coral-mist);
+      line-height: 1.5;
+      font-family: var(--font-serif);
+    }
+    .ap-quote em { font-style: italic; color: var(--coral-light); }
+    .ap-stats { display: flex; flex-direction: column; gap: 12px; }
+    .ap-stat {
+      background: var(--coral-dark);
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-md);
+    }
+    .ap-stat-n { font-size: 26px; font-weight: 700; color: var(--coral-mist); }
+    .ap-stat-l { font-size: 12px; color: var(--coral-light); margin-top: 3px; }
+    .ap-body {
+      background: var(--coral-mist);
+      padding: 2.5rem 2rem;
+    }
+    .ap-body-title { font-size: 13px; letter-spacing: 0.1em; color: var(--coral-mid); text-transform: uppercase; font-weight: 700; margin-bottom: 1rem; }
+    .ap-body-text { font-size: 14px; color: var(--coral-dark); line-height: 1.85; max-width: 600px; }
+    .ap-tl { background: var(--coral-pale); padding: 2rem; }
+    .ap-tl-title { font-size: 11px; letter-spacing: 0.12em; color: var(--coral-dark); text-transform: uppercase; font-weight: 700; margin-bottom: 1rem; }
+    .ap-tl-items { display: flex; flex-direction: column; gap: 10px; }
+    .ap-tl-item {
+      background: #fff;
+      padding: 0.9rem 1.25rem;
+      border-left: 4px solid var(--coral-base);
+    }
+    .ap-tl-year { font-size: 11px; color: var(--coral-mid); margin-bottom: 4px; font-weight: 500; }
+    .ap-tl-name { font-size: 14px; font-weight: 700; color: var(--coral-deep); }
+
+    /* ══════════════════════════
+       CONTACT PANEL
+    ══════════════════════════ */
+    .conp-top {
+      background: var(--green-dark);
+      padding: 3rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .conp-title { font-size: 28px; font-weight: 700; color: var(--green-mist); margin-bottom: 0.75rem; }
+    .conp-desc { font-size: 14px; color: var(--green-pale); line-height: 1.75; }
+    .conp-links { display: flex; flex-direction: column; gap: 10px; margin-top: 1.25rem; }
+    .conp-link { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--green-pale); }
+    .conp-link i { font-size: 18px; color: var(--green-light); }
+    .conp-form-wrap {
+      background: var(--green-mist);
+      padding: 1.75rem;
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .conp-form-wrap input,
+    .conp-form-wrap textarea {
+      width: 100%;
+      font-size: 14px;
+      padding: 10px 14px;
+      border: 1px solid var(--green-pale);
+      border-radius: var(--radius-md);
+      background: #fff;
+      color: var(--green-deep);
+      font-family: var(--font-sans);
+      resize: none;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .conp-form-wrap input:focus,
+    .conp-form-wrap textarea:focus { border-color: var(--green-base); }
+    .conp-form-wrap textarea { height: 90px; }
+    .conp-submit {
+      font-size: 14px;
+      padding: 11px;
+      border-radius: var(--radius-md);
+      background: var(--green-mid);
+      color: var(--green-mist);
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-family: var(--font-sans);
+      width: 100%;
+      transition: background 0.2s;
+    }
+    .conp-submit:hover { background: var(--green-base); }
+    .conp-bottom {
+      background: var(--green-deep);
+      padding: 1.1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .conp-copy { font-size: 12px; color: var(--green-mid); }
+    .conp-socials { display: flex; gap: 16px; }
+    .conp-socials a {
+      font-size: 12px;
+      color: var(--green-mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .conp-socials a:hover { color: var(--green-pale); }
+
+    /* ══════════════════════════
+       RESPONSIVE
+    ══════════════════════════ */
+    @media (max-width: 640px) {
+      .topbar { padding: 0.9rem 1.25rem; }
+      .home-hero { grid-template-columns: 1fr; }
+      .hh-right { display: none; }
+      .home-stripe { grid-template-columns: 1fr 1fr; }
+      .hh-title { font-size: 28px; }
+      .ap-hero { grid-template-columns: 1fr; }
+      .ap-stats { flex-direction: row; }
+      .conp-top { grid-template-columns: 1fr; }
+      .cp-item { grid-template-columns: 40px 1fr; }
+      .cp-badge { display: none; }
+    }
+    @media (max-width: 400px) {
+      .hh-title { font-size: 24px; }
+      .home-stripe { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="logo">Portfolio</div>
+    <span class="hire-badge">Available for hire</span>
+  </header>
+
+  <!-- TAB BAR -->
+  <nav class="tab-bar" role="tablist">
+    <div class="tab active" role="tab" aria-selected="true"  onclick="showTab('home',this)">홈</div>
+    <div class="tab"        role="tab" aria-selected="false" onclick="showTab('skills',this)">기술</div>
+    <div class="tab"        role="tab" aria-selected="false" onclick="showTab('certs',this)">자격증</div>
+    <div class="tab"        role="tab" aria-selected="false" onclick="showTab('about',this)">소개</div>
+    <div class="tab"        role="tab" aria-selected="false" onclick="showTab('contact',this)">연락처</div>
+  </nav>
+
+  <!-- ═══ HOME ═══ -->
+  <section id="panel-home" class="panel active" role="tabpanel">
+    <div class="home-hero">
+      <div class="hh-left">
+        <p class="hh-eyebrow">Mobile Developer · 공인중개사 · 교육전문가</p>
+        <h1 class="hh-title">코드로 짓고,<br>부동산으로 잇고,<br><em>교육으로 키운다</em></h1>
+        <p class="hh-desc">숙련된 모바일 앱 개발자이자 5개 전문 자격증을 보유한 멀티 스페셜리스트. PHP · Linux 기반 풀스택부터 부동산 컨설팅, 아동 그림책 교육까지 활동합니다.</p>
+        <div class="hh-btns">
+          <button class="btn-w" onclick="showTab('contact', document.querySelectorAll('.tab')[4])">연락하기</button>
+          <button class="btn-o" onclick="showTab('about', document.querySelectorAll('.tab')[3])">소개 보기 ↗</button>
+        </div>
+      </div>
+      <div class="hh-right">
+        <div>
+          <div class="hh-stat-big">5</div>
+          <div class="hh-stat-label">전문 자격증 보유</div>
+        </div>
+        <div class="tag-stack">
+          <div class="tag-pill"><i class="ti ti-building-estate"></i><span>공인중개사</span></div>
+          <div class="tag-pill"><i class="ti ti-cpu"></i><span>정보처리기사</span></div>
+          <div class="tag-pill"><i class="ti ti-book"></i><span>그림책 지도사</span></div>
+          <div class="tag-pill"><i class="ti ti-device-laptop"></i><span>컴퓨터활용능력</span></div>
+          <div class="tag-pill"><i class="ti ti-certificate"></i><span>DIAT</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="home-stripe">
+      <div class="hs-cell"><div class="hs-num">10+</div><div class="hs-lbl">개발 경력 (년)</div></div>
+      <div class="hs-cell"><div class="hs-num">iOS · AOS</div><div class="hs-lbl">모바일 플랫폼</div></div>
+      <div class="hs-cell"><div class="hs-num">PHP · Linux</div><div class="hs-lbl">서버 스택</div></div>
+      <div class="hs-cell"><div class="hs-num">3 분야</div><div class="hs-lbl">개발·부동산·교육</div></div>
+    </div>
+  </section>
+
+  <!-- ═══ SKILLS ═══ -->
+  <section id="panel-skills" class="panel" role="tabpanel">
+    <div class="sp-header">
+      <h2 class="sp-htitle">기술 스택</h2>
+      <p class="sp-hsub">모바일부터 서버, 프론트까지 직접 설계하고 구현합니다.</p>
+    </div>
+    <div class="sp-grid">
+      <div class="sp-card"><i class="ti ti-device-mobile sp-icon"></i><div class="sp-name">모바일 개발</div><div class="sp-desc">iOS / Android 하이브리드 앱 설계 및 배포</div></div>
+      <div class="sp-card"><i class="ti ti-server sp-icon"></i><div class="sp-name">PHP · Linux</div><div class="sp-desc">서버 사이드 개발 및 리눅스 운영 환경 구축</div></div>
+      <div class="sp-card"><i class="ti ti-layout sp-icon"></i><div class="sp-name">웹 프론트엔드</div><div class="sp-desc">반응형 HTML/CSS/JS, 모바일·PC 최적화</div></div>
+      <div class="sp-card"><i class="ti ti-database sp-icon"></i><div class="sp-name">데이터베이스</div><div class="sp-desc">MySQL 설계 및 쿼리 최적화</div></div>
+      <div class="sp-card"><i class="ti ti-code sp-icon"></i><div class="sp-name">풀스택 개발</div><div class="sp-desc">프론트·백엔드 통합 서비스 구축 경험</div></div>
+      <div class="sp-card"><i class="ti ti-git-branch sp-icon"></i><div class="sp-name">버전 관리</div><div class="sp-desc">Git 기반 협업 및 소스 관리</div></div>
+    </div>
+    <div class="sp-footer">
+      <span class="sp-chip">Swift</span>
+      <span class="sp-chip">Kotlin</span>
+      <span class="sp-chip">PHP</span>
+      <span class="sp-chip">MySQL</span>
+      <span class="sp-chip">HTML/CSS</span>
+      <span class="sp-chip">JavaScript</span>
+      <span class="sp-chip">Linux</span>
+      <span class="sp-chip">Git</span>
+    </div>
+  </section>
+
+  <!-- ═══ CERTS ═══ -->
+  <section id="panel-certs" class="panel" role="tabpanel">
+    <div class="cp-top">
+      <h2 class="cp-title">보유 자격증</h2>
+      <p class="cp-sub">국가 공인 및 민간 자격증 5개 보유 — 개발·부동산·교육 분야 전문성</p>
+    </div>
+    <div class="cp-list">
+      <div class="cp-item">
+        <div class="cp-num">01</div>
+        <div><div class="cp-info-title">공인중개사</div><div class="cp-info-sub">부동산 전문 국가자격</div></div>
+        <span class="cp-badge">국가자격</span>
+      </div>
+      <div class="cp-item">
+        <div class="cp-num">02</div>
+        <div><div class="cp-info-title">정보처리기사</div><div class="cp-info-sub">IT 분야 국가기술자격</div></div>
+        <span class="cp-badge">국가기술</span>
+      </div>
+      <div class="cp-item">
+        <div class="cp-num">03</div>
+        <div><div class="cp-info-title">그림책 지도사</div><div class="cp-info-sub">아동 독서 교육 전문 자격</div></div>
+        <span class="cp-badge">민간자격</span>
+      </div>
+      <div class="cp-item">
+        <div class="cp-num">04</div>
+        <div><div class="cp-info-title">컴퓨터활용능력</div><div class="cp-info-sub">사무 자동화 및 스프레드시트</div></div>
+        <span class="cp-badge">국가기술</span>
+      </div>
+      <div class="cp-item">
+        <div class="cp-num">05</div>
+        <div><div class="cp-info-title">DIAT</div><div class="cp-info-sub">디지털 정보 활용 능력</div></div>
+        <span class="cp-badge">민간자격</span>
+      </div>
+    </div>
+    <div class="cp-bottom">
+      <span class="cp-bottom-text">개발·부동산·교육 3개 분야 전문 역량</span>
+      <button class="cp-bottom-btn" onclick="showTab('contact', document.querySelectorAll('.tab')[4])">문의하기 →</button>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="panel-about" class="panel" role="tabpanel">
+    <div class="ap-hero">
+      <blockquote class="ap-quote">
+        "코드, 부동산, 교육 —<br>세 분야를 <em>하나의 시선</em>으로 연결합니다."
+      </blockquote>
+      <div class="ap-stats">
+        <div class="ap-stat"><div class="ap-stat-n">10+</div><div class="ap-stat-l">개발 경력</div></div>
+        <div class="ap-stat"><div class="ap-stat-n">5개</div><div class="ap-stat-l">보유 자격증</div></div>
+        <div class="ap-stat"><div class="ap-stat-n">3 분야</div><div class="ap-stat-l">전문 영역</div></div>
+      </div>
+    </div>
+    <div class="ap-body">
+      <p class="ap-body-title">About me</p>
+      <p class="ap-body-text">숙련된 모바일 개발자로서 iOS와 Android 앱을 설계하고, PHP·Linux 기반 웹 서비스를 직접 구축해왔습니다. 공인중개사와 그림책 지도사 자격을 함께 보유하며, 기술·부동산·교육이라는 세 영역을 넘나드는 독특한 전문성을 갖추고 있습니다. 단순한 개발자를 넘어, 다양한 분야의 문제를 기술적 시각으로 풀어낼 수 있는 멀티 스페셜리스트입니다.</p>
+    </div>
+    <div class="ap-tl">
+      <p class="ap-tl-title">경력 흐름</p>
+      <div class="ap-tl-items">
+        <div class="ap-tl-item"><div class="ap-tl-year">현재</div><div class="ap-tl-name">모바일 앱 개발 · 프리랜서</div></div>
+        <div class="ap-tl-item"><div class="ap-tl-year">—</div><div class="ap-tl-name">공인중개사 자격 취득</div></div>
+        <div class="ap-tl-item"><div class="ap-tl-year">—</div><div class="ap-tl-name">PHP 기반 웹 서비스 개발</div></div>
+        <div class="ap-tl-item"><div class="ap-tl-year">—</div><div class="ap-tl-name">정보처리기사 취득</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section id="panel-contact" class="panel" role="tabpanel">
+    <div class="conp-top">
+      <div>
+        <h2 class="conp-title">연락하기</h2>
+        <p class="conp-desc">개발 의뢰, 협업 제안, 부동산 상담 등 어떤 문의든 환영합니다. 빠르게 답변드리겠습니다.</p>
+        <div class="conp-links">
+          <div class="conp-link"><i class="ti ti-mail"></i>email@example.com</div>
+          <div class="conp-link"><i class="ti ti-phone"></i>010-0000-0000</div>
+          <div class="conp-link"><i class="ti ti-brand-github"></i>github.com/username</div>
+          <div class="conp-link"><i class="ti ti-map-pin"></i>서울, 대한민국</div>
+        </div>
+      </div>
+      <div class="conp-form-wrap">
+        <input type="text" placeholder="이름" autocomplete="name" />
+        <input type="email" placeholder="이메일" autocomplete="email" />
+        <input type="text" placeholder="제목" />
+        <textarea placeholder="문의 내용을 입력해주세요"></textarea>
+        <button class="conp-submit" onclick="alert('문의가 접수되었습니다. 감사합니다!')">보내기 →</button>
+      </div>
+    </div>
+    <div class="conp-bottom">
+      <span class="conp-copy">© 2026 Portfolio. All rights reserved.</span>
+      <div class="conp-socials">
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Blog</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function showTab(name, el) {
+      document.querySelectorAll('.panel').forEach(function(p) {
+        p.classList.remove('active');
+      });
+      document.querySelectorAll('.tab').forEach(function(t) {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      document.getElementById('panel-' + name).classList.add('active');
+      if (el) {
+        el.classList.add('active');
+        el.setAttribute('aria-selected', 'true');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
